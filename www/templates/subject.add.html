@@ -2,24 +2,15 @@
   <ion-content>
     <div class="list">
 
-      <h1>{{vm.currEvent}}</h1>
+      <h3 class="eventTitle">{{vm.currEvent.name}}</h3>
 
       <label class="item item-input" style="margin-bottom:25px">
         <input type="text" ng-model="vm.subject.nickname" placeholder="Nickname" ng-minlength="3">
-        {{names.word}}
       </label>
 
       <button class="button button-block button-positive" ng-click="vm.saveSubject()">Submit</button>
       <button class="button button-block button-balanced" ng-click="vm.suggestSubject()">Suggest</button>
 
-      <!-- <a href="#/events" class="item button button-block button-positive" ng-disabled="!vm.subject.name" ng-click="vm.saveSubject(); modal.show()">
-          Submit
-        </button>
-        <a href="#/name-suggest" class="item button button-block button-balanced" ng-model="suggestName" ng-click="suggestName()">
-          Suggest
-        </a> -->
-
-      <h3>{{missingNewItemError}}</h3>
     </div>
   </ion-content>
 </ion-view>

@@ -10,7 +10,12 @@
       cache: false,
       url: '/event-list',
       templateUrl: 'templates/event.list.html',
-      controller: 'EventListCtrl as vm'
+      controller: 'EventListCtrl as vm',
+      resolve: {
+        allEvents: function (eventsSrvc) {
+          return eventsSrvc.getAllEvents();
+        }
+      }
     });
 
     $stateProvider.state('event-edit', {
@@ -32,7 +37,7 @@
       controller: 'EventAddCtrl as vm'
     });
 
-    $urlRouterProvider.otherwise('event-list');
+    // $urlRouterProvider.otherwise('event-list');
 
   });
 
