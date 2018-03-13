@@ -1,3 +1,5 @@
+// import { get } from "http";
+
 (function () {
 
   'use strict';
@@ -6,9 +8,9 @@
 
   app.controller('SubjectAddCtrl', control);
 
-  control.$inject = ['$state', '$ionicPopup', 'subjectsSrvc'];
+  control.$inject = ['$state', '$ionicPopup', 'subjectsSrvc', 'activityevents'];
 
-  function control($state, $ionicPopup, subjectsSrvc) {
+  function control($state, $ionicPopup, subjectsSrvc, activityevents) {
 
     var vm = angular.extend(this, {
       subject: {
@@ -19,7 +21,25 @@
     });
 
     vm.saveSubject = function () {
-      subjectsSrvc.postSubject(vm.subject).then(
+      activityevents.getSubjects(
+        { params : {
+          nickname: vm.subject.nickname
+        }
+      }).then(
+        function (response){
+          console.log(response.data)
+          if(responsed.data.length == 0){
+            //unique name
+          } else {
+            //name taken!
+          }
+        },
+        function (){
+
+        }
+      );
+
+      /* subjectsSrvc.postSubject(vm.subject).then(
         function success(data) {
           subjectsSrvc.addSubject(data);
           $ionicPopup.alert({
@@ -30,16 +50,37 @@
         function failure(error) {
           console.error(error);
         }
-      );
+      ); */
 
+      
     };
 
     vm.suggestSubject = function () {
-      $http.get('../names.json');
-      var randNames = [{
+      var nickname = vm.namesList[Math.floor(Math.random()*vm.namesList.length)].word;
+      nickname += vm.namesList[Math.floor(Math.random()*vm.namesList.length)].word;
+      console.log(
+        nickname
+      );
 
-      }];
+      
+      vm.subject.nickname = nickname;
     };
+
+    vm.init = false;
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', '../../names.json', true); //replace data
+    xobj.onreadystatechange = function () {
+      if (xobj.readyState == 4 && xobj.status == "200") {
+        vm.namesList = (JSON.parse(xobj.responseText)).data;
+        vm.init = true;
+        console.log(vm.init, vm.namesList);
+      }
+    };
+    xobj.send(null);
+
   }
+
 
 })();
