@@ -1,16 +1,19 @@
 <ion-view view-title="Registrar App">
+  <ion-nav-buttons side="right">
+    <button class="button button-stable icon-left ion-compose" ng-click="vm.changeEvent()"></button>
+  </ion-nav-buttons>
   <ion-content>
-    <div class="list">
 
-      <h3 class="eventTitle">{{vm.currEvent.name}}</h3>
+    <h3 style="text-align: center; margin: 3vh 0;">{{vm.currEvent.name}}</h3>
 
-      <label class="item item-input" style="margin-bottom:25px">
-        <input type="text" ng-model="vm.subject.nickname" placeholder="Nickname" ng-minlength="3">
+    <form name="nicknameForm" novalidate>
+      <label class="item item-input">
+        <span style="color: red; position: absolute; right: 2%;" ng-show="nicknameForm.subjectName.$touched && nicknameForm.subjectName.$invalid">Required</span>
+        <input name="subjectName" type="text" ng-model="vm.subject.nickname" placeholder="Nickname" ng-minlength="3" required>
       </label>
+      <button class="button button-block button-positive" ng-click="vm.saveSubject()" ng-disabled="nicknameForm.$invalid">Submit</button>
+    </form>
+    <button class="button button-block button-balanced" ng-click="vm.suggestSubject()">Suggest</button>
 
-      <button class="button button-block button-positive" ng-click="vm.saveSubject()">Submit</button>
-      <button class="button button-block button-balanced" ng-click="vm.suggestSubject()">Suggest</button>
-
-    </div>
   </ion-content>
 </ion-view>

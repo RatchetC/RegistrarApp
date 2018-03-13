@@ -17,7 +17,8 @@
       subject: {
         id: new Date().getTime().toString(),
         nickname: ''
-      }
+      },
+      loadedJSON: false
     });
 
     function init() {
@@ -30,6 +31,19 @@
           });
           $state.go('event-list');
         }
+      }
+      if (vm.loadedJSON === false) {
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET', '../../names.json', true); //replace data
+        xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            vm.namesList = (JSON.parse(xobj.responseText)).data;
+            vm.loadedJSON = true;
+            console.log(vm.loadedJSON, vm.namesList);
+          }
+        };
+        xobj.send(null);
       }
     }
 
@@ -78,24 +92,9 @@
       console.log(
         nickname
       );
-
       
       vm.subject.nickname = nickname;
     };
-
-    vm.init = false;
-
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', '../../names.json', true); //replace data
-    xobj.onreadystatechange = function () {
-      if (xobj.readyState == 4 && xobj.status == "200") {
-        vm.namesList = (JSON.parse(xobj.responseText)).data;
-        vm.init = true;
-        console.log(vm.init, vm.namesList);
-      }
-    };
-    xobj.send(null);
 
   }
 
