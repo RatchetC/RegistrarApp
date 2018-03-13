@@ -28,30 +28,32 @@
       }).then(
         function (response){
           console.log(response.data)
-          if(responsed.data.length == 0){
+          if(response.data.length == 0){
             //unique name
+            subjectsSrvc.postSubject(vm.subject).then(
+              function success(data) {
+                subjectsSrvc.addSubject(data);
+                $ionicPopup.alert({
+                  title: 'Success!',
+                  template: data.nickname + ' was registered successfully!!'
+                });
+              },
+              function failure(error) {
+                console.error(error);
+              }
+            );
           } else {
             //name taken!
+            $ionicPopup.alert({
+              title: 'Error Name Taken!',
+              template: vm.subject.nickname + ' was not registered successfully!!'
+            });
           }
         },
-        function (){
-
+        function (error){
+          console.log(error);
         }
       );
-
-      /* subjectsSrvc.postSubject(vm.subject).then(
-        function success(data) {
-          subjectsSrvc.addSubject(data);
-          $ionicPopup.alert({
-            title: 'Success!',
-            template: data.nickname + ' was registered successfully!!'
-          });
-        },
-        function failure(error) {
-          console.error(error);
-        }
-      ); */
-
       
     };
 
