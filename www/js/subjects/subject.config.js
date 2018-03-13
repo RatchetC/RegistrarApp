@@ -13,6 +13,13 @@
       controller: 'SubjectAddCtrl as vm'
     });
 
+    // $stateProvider.state('name-input', {
+    //   cache: false,
+    //   url: '/name-suggest',
+    //   templateUrl: 'templates/subject.suggest.html',
+    //   controller: 'SubjectSuggCtrl as vm'
+    // });
+
     $urlRouterProvider.otherwise('name-input');
 
   });

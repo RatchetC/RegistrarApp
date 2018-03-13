@@ -6,10 +6,11 @@
 
       <label class="item item-input" style="margin-bottom:25px">
         <input type="text" ng-model="vm.subject.nickname" placeholder="Nickname" ng-minlength="3">
+        {{names.word}}
       </label>
 
       <button class="button button-block button-positive" ng-click="vm.saveSubject()">Submit</button>
-      <button class="button button-block button-balanced">Suggest</button>
+      <button class="button button-block button-balanced" ng-click="vm.suggestSubject()">Suggest</button>
 
       <!-- <a href="#/events" class="item button button-block button-positive" ng-disabled="!vm.subject.name" ng-click="vm.saveSubject(); modal.show()">
           Submit

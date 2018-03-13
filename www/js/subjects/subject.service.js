@@ -13,13 +13,13 @@
     var service = {};
 
     service.subjects = [];
-    
+
     service.postSubject = function (subject) {
-      
+
       var promiseObj = $q.defer();
 
       var config = {};
-      
+
       console.log(subject);
 
       activityevents.postSubjects(subject, config).then(

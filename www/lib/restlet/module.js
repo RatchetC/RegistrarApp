@@ -6,7 +6,7 @@
   angular.module('restlet.sdk')
     .service('activityevents', ['$http', activityevents]);
 
-  function activityevents ($http) {
+  function activityevents($http) {
 
     var endpoint = 'https://activityevents.restlet.net/v1';
     var globalSecurity = {};
@@ -915,7 +915,7 @@
       };
     }
 
-    function isNotAuthenticated (securityRequirementName) {
+    function isNotAuthenticated(securityRequirementName) {
       return securityRequirementName === '_NONE';
     }
 
@@ -940,11 +940,11 @@
      * which can contain among other things the headers & the params
      * @param {String...} requirement - the name of the security scheme to support
      */
-    function addSecurityConfiguration (config) {
+    function addSecurityConfiguration(config) {
       var securityRequirements = Array.prototype.slice.call(arguments, 1);
 
-      return securityConfigurationHelper(config, globalSecurity, 
-        securityConfigurations, isNotAuthenticated, 
+      return securityConfigurationHelper(config, globalSecurity,
+        securityConfigurations, isNotAuthenticated,
         securityRequirements);
     }
 
@@ -957,8 +957,8 @@
      * @param config - Object describing the request to be made and how it should be processed.
      * @returns{HttpPromise} a promise object
      */
-    function send (methodName, url, config, body) {
-      return sendHelper ($http, methodName, url, config, body);
+    function send(methodName, url, config, body) {
+      return sendHelper($http, methodName, url, config, body);
     };
 
     /**
@@ -966,15 +966,15 @@
      *
      * @param newEndPoint - the endpoint to be set.
      */
-    function setEndpoint (newEndPoint) {
+    function setEndpoint(newEndPoint) {
       endpoint = newEndPoint;
     }
   }
 
-  function securityConfigurationHelper (config, globalSecurity, 
-    securityConfigurations, isNotAuthenticated, 
+  function securityConfigurationHelper(config, globalSecurity,
+    securityConfigurations, isNotAuthenticated,
     securityRequirements) {
-    
+
     if (securityRequirements.length === 0) {
       return enhanceWithGlobalSecurityIfRequired(config, globalSecurity);
     }
@@ -993,7 +993,7 @@
     throw new Error('There is no configured security scheme found among: ' + securityRequirements.join(', '));
   }
 
-  function enhanceWithGlobalSecurityIfRequired (config, globalSecurity) {
+  function enhanceWithGlobalSecurityIfRequired(config, globalSecurity) {
     if (!isEmpty(globalSecurity)) {
       config = angular.copy(config);
       config = enhanceConfigurationWithSpecificSecurity(config, globalSecurity);
@@ -1002,7 +1002,7 @@
     return config;
   }
 
-  function enhanceConfigurationWithSpecificSecurity (config, securityConfig) {
+  function enhanceConfigurationWithSpecificSecurity(config, securityConfig) {
     config = angular.copy(config) || {};
 
     if (!config.headers) {
@@ -1038,13 +1038,13 @@
    *   - the 2n set (even indexes) are the values
    *   - the 2n + 1 set (odd indexes) are the labels for the error reports
    */
-  function checkPathVariables () {
+  function checkPathVariables() {
 
     var errors = [];
 
     for (var i = 0; i < arguments.length; i += 2) {
-      if (angular.isUndefined(arguments[ i ])) {
-        errors.push(arguments[ i + 1 ]);
+      if (angular.isUndefined(arguments[i])) {
+        errors.push(arguments[i + 1]);
       }
     }
 
@@ -1059,7 +1059,7 @@
    * @param username - the user's username
    * @param password - the user's password
    */
-  function configureGlobalBasicAuthentication (globalSecurity) {
+  function configureGlobalBasicAuthentication(globalSecurity) {
     return function (username, password) {
       globalSecurity.type = 'BASIC';
       globalSecurity.token = 'Basic ' + btoa(username + ':' + password);
@@ -1072,7 +1072,7 @@
    *
    * @param token - the oAuth token to use
    */
-  function configureGlobalOAuth2Token (globalSecurity) {
+  function configureGlobalOAuth2Token(globalSecurity) {
     return function (token) {
       globalSecurity.type = 'OAUTH2';
       globalSecurity.token = 'Bearer ' + token;
@@ -1086,7 +1086,7 @@
    * @param tokenValue - the value of the token.
    * @param location - the location of the token, either header or query.
    */
-  function configureGlobalApiToken (globalSecurity) {
+  function configureGlobalApiToken(globalSecurity) {
     return function (tokenName, tokenValue, location) {
       if (angular.isUndefined(location)) {
         location = 'header';
@@ -1113,7 +1113,7 @@
    * @param config - Object describing the request to be made and how it should be processed.
    * @returns{HttpPromise} a promise object
    */
-  function sendHelper ($http, methodName, url, config, body) {
+  function sendHelper($http, methodName, url, config, body) {
 
     config = config || {};
 
@@ -1126,7 +1126,7 @@
     });
   };
 
-  function isEmpty (obj) {
+  function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   }
 

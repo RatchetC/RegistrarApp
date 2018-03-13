@@ -31,9 +31,14 @@
           console.error(error);
         }
       );
-      // vm.loading = true;
-      
 
+    };
+
+    vm.suggestSubject = function () {
+      $http.get('../names.json');
+      var randNames = [{
+
+      }];
     };
   }
 
