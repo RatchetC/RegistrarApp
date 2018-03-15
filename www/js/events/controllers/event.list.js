@@ -6,18 +6,28 @@
 
   app.controller('EventListCtrl', control);
 
-  control.$inject = ['$state', '$ionicHistory', 'allEvents'];
+  control.$inject = ['$state', '$ionicHistory', '$ionicPopup', 'allEvents'];
 
-  function control($state, $ionicHistory, allEvents) {
+  function control($state, $ionicHistory, $ionicPopup, allEvents) {
 
     var vm = angular.extend(this, {
       events: allEvents
     });
 
     vm.selectEvent = function selectEvent(event) {
-      console.warn(event);
-      window.localStorage['currEvent'] = angular.toJson(event);
-      $ionicHistory.goBack();
+      $ionicPopup.confirm({
+        title: 'Confirm Selection',
+        template: 'Are you sure you want to change to this event?'
+      }).then(function (response) {
+
+        var YES = true;
+
+        if (response === YES) {
+          window.localStorage['currEvent'] = angular.toJson(event);
+          $ionicHistory.goBack();
+        }
+
+      });
     };
 
   }

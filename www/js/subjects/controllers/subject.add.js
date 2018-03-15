@@ -88,12 +88,26 @@
 
     vm.suggestSubject = function () {
       var nickname = vm.namesList[Math.floor(Math.random()*vm.namesList.length)].word;
-      nickname += vm.namesList[Math.floor(Math.random()*vm.namesList.length)].word;
+      nickname += ' ' + vm.namesList[Math.floor(Math.random()*vm.namesList.length)].word;
       console.log(
         nickname
       );
       
       vm.subject.nickname = nickname;
+    };
+    
+    vm.changeEvent = function () {
+
+      $ionicPopup.confirm({
+        title: 'Change Event',
+        template: 'Are you sure that you want to change the selected event?'
+      }).then( function (response) {
+        var YES = true;
+        if (response === YES) {
+          $state.go('event-list');
+        }
+      });
+
     };
 
   }
