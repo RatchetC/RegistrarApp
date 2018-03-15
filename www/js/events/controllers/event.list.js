@@ -6,9 +6,9 @@
 
   app.controller('EventListCtrl', control);
 
-  control.$inject = ['$state', '$ionicHistory', '$ionicPopup', 'allEvents'];
+  control.$inject = ['$ionicHistory', '$ionicPopup', 'allEvents'];
 
-  function control($state, $ionicHistory, $ionicPopup, allEvents) {
+  function control($ionicHistory, $ionicPopup, allEvents) {
 
     var vm = angular.extend(this, {
       events: allEvents

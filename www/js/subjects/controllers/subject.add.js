@@ -22,16 +22,16 @@
     });
 
     function init() {
+      
+      vm.currEvent = angular.fromJson(window.localStorage['currEvent']);
       if (vm.currEvent === undefined) {
-        vm.currEvent = angular.fromJson(window.localStorage['currEvent']);
-        if (vm.currEvent === undefined) {
-          $ionicPopup.alert({
-            title: 'Select Event',
-            template: 'There is no event selected. Please select your event.'
-          });
-          $state.go('event-list');
-        }
+        $ionicPopup.alert({
+          title: 'Select Event',
+          template: 'There is no event selected. Please select your event.'
+        });
+        $state.go('event-list');
       }
+
       if (vm.loadedJSON === false) {
         var xobj = new XMLHttpRequest();
         xobj.overrideMimeType("application/json");
