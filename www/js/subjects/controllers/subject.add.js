@@ -8,10 +8,9 @@
 
   app.controller('SubjectAddCtrl', control);
 
-  control.$inject = ['$state', '$ionicPopup', 'subjectsSrvc', 'activityevents'];
+  control.$inject = ['$state', '$ionicPopup', 'subjectsSrvc', 'eventSubjectMappingsSrvc', 'activityevents'];
 
-  function control($state, $ionicPopup, subjectsSrvc, activityevents) {
-
+  function control($state, $ionicPopup, subjectsSrvc, eventSubjectMappingsSrvc, activityevents) {
 
     var vm = angular.extend(this, {
       subject: {
@@ -62,10 +61,23 @@
             subjectsSrvc.postSubject(vm.subject).then(
               function success(data) {
                 subjectsSrvc.addSubject(data);
-                $ionicPopup.alert({
-                  title: 'Success!',
-                  template: data.nickname + ' was registered successfully!!'
-                });
+                var eventSubjectMapping = {
+                  id: new Date().getTime().toString(),
+                  subject: data.id,
+                  event: vm.currEvent.id
+                };
+                eventSubjectMappingsSrvc.postEventSubjectMapping(eventSubjectMapping).then(
+                  function success(response) {
+                    eventSubjectMappingsSrvc.addEventSubjectMapping(response.data);
+                    $ionicPopup.alert({
+                      title: 'Success!',
+                      template: data.nickname + ' was registered successfully!!'
+                    });
+                  },
+                  function failure(error) {
+                    console.error(error);
+                  }
+                );
               },
               function failure(error) {
                 console.error(error);
