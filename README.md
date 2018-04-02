@@ -88,22 +88,7 @@ Java Development Kit and Android Software Development Kit
 >Navigate to the top level folder of the project and run the `ionic cordova platform` command. This should show you a list of platforms that you have installed and a list of platforms that are available for installation. If android is not already installed, ( which it shouldn't be if this is the first time that you are running this app on a device ), run the `ionic cordova platform add android` command to download and add the android platform. Once that is finished, run the `ionic cordova run android` command to build and run the app on your Android Device.
 
 ```bash
-$ ionic cordova platform
-Installed platforms:
-
-Available platforms:
-  android ~6.3.0
-  blackberry ~3.8.0 (deprecated)
-  browser ~5.0.0
-  ios ~4.5.1
-  osx ~4.0.1
-  ubuntu ~4.3.4 (deprecated)
-  webos ~3.7.0
-  windows ~5.0.0
-  www ^3.12.0
-
-$ ionic cordova platform add android
-output
-$ ionic cordova run android
-output
+ionic cordova platform
+ionic cordova platform add android
+ionic cordova run android
 ```
