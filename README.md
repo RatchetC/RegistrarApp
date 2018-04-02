@@ -46,6 +46,14 @@ v5.5.1
 $ npm install -g ionic
 ```
 
+### Java
+
+The Java Development Kit is required to build and run the project on android. You can download and install it [here](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
+
+### Android Studio
+
+The Android SDK is also needed to build and run the project on Android and the best way to install it is to download Android Studio and use the SDK Manager to download the minimum SDK for the project which is Android 4.4 KitKat. You can download Android Studio [here](https://developer.android.com/studio/index.html).
+
 ## Download the project
 
 Download the project as a zip file and unzip into the folder you want to keep it in or clone this repository from GitHub. You can do this easily using **[GitHub Desktop](https://desktop.github.com/)** or any other version control system software, e.g. **[SourceTree](https://www.sourcetreeapp.com/)**.
@@ -87,3 +95,24 @@ Guide to set PATH variables can be found **[here](https://cordova.apache.org/doc
 ### Running the app on your Android Device
 
 Navigate to the top level folder of the project and run the `ionic cordova platform` command. This should show you a list of platforms that you have installed and a list of platforms that are available for installation. If android is not already installed, ( which it shouldn't be if this is the first time that you are running this app on a device ), run the `ionic cordova platform add android` command to download and add the android platform. Once that is finished, run the `ionic cordova run android` command to build and run the app on your Android Device.
+
+```bash
+$ ionic cordova platform
+Installed platforms:
+
+Available platforms:
+  android ~6.3.0
+  blackberry ~3.8.0 (deprecated)
+  browser ~5.0.0
+  ios ~4.5.1
+  osx ~4.0.1
+  ubuntu ~4.3.4 (deprecated)
+  webos ~3.7.0
+  windows ~5.0.0
+  www ^3.12.0
+
+$ ionic cordova platform add android
+output
+$ ionic cordova run android
+output
+```
