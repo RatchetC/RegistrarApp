@@ -23,7 +23,7 @@
         var YES = true;
 
         if (response === YES) {
-          window.localStorage['currEvent'] = angular.toJson(event);
+          window.localStorage.currEvent = angular.toJson(event);
           $ionicHistory.goBack();
         }
 

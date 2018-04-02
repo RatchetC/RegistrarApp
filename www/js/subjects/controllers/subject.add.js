@@ -1,5 +1,3 @@
-// import { get } from "http";
-
 (function () {
 
   'use strict';
@@ -8,9 +6,9 @@
 
   app.controller('SubjectAddCtrl', control);
 
-  control.$inject = ['$state', '$ionicPopup', 'subjectsSrvc', 'eventSubjectMappingsSrvc', 'activityevents'];
+  control.$inject = ['$state', '$ionicPopup', '$http', 'subjectsSrvc', 'eventSubjectMappingsSrvc', 'activityevents'];
 
-  function control($state, $ionicPopup, subjectsSrvc, eventSubjectMappingsSrvc, activityevents) {
+  function control($state, $ionicPopup, $http, subjectsSrvc, eventSubjectMappingsSrvc, activityevents) {
 
     var vm = angular.extend(this, {
       subject: {
@@ -22,7 +20,7 @@
 
     function init() {
       
-      vm.currEvent = angular.fromJson(window.localStorage['currEvent']);
+      vm.currEvent = angular.fromJson(window.localStorage.currEvent);
       if (vm.currEvent === undefined) {
         $ionicPopup.alert({
           title: 'Select Event',
@@ -31,19 +29,16 @@
         $state.go('event-list');
       }
 
-      if (vm.loadedJSON === false) {
-        var xobj = new XMLHttpRequest();
-        xobj.overrideMimeType("application/json");
-        xobj.open('GET', '../../names.json', true); //replace data
-        xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            vm.namesList = (JSON.parse(xobj.responseText)).data;
-            vm.loadedJSON = true;
-            console.log(vm.loadedJSON, vm.namesList);
-          }
-        };
-        xobj.send(null);
-      }
+      $http.get('names.json').then(
+        function sucess(response) {
+          console.log(response.data.data);
+          vm.namesList = response.data.data;
+          console.log("Success!");
+        },
+        function failure(error) {
+          console.error(error);
+        }
+      );
     }
 
     init();
