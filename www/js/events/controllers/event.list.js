@@ -19,14 +19,11 @@
         title: 'Confirm Selection',
         template: 'Are you sure you want to change to this event?'
       }).then(function (response) {
-
         var YES = true;
-
         if (response === YES) {
           window.localStorage.currEvent = angular.toJson(event);
           $ionicHistory.goBack();
         }
-
       });
     };
 

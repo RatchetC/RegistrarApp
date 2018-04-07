@@ -6,14 +6,14 @@
 
     <h3 style="text-align: center; margin: 3vh 0;">{{vm.currEvent.name}}</h3>
 
-    <form name="nicknameForm" novalidate>
+    <form class="list list-inset" name="nicknameForm" novalidate>
       <label class="item item-input">
         <span style="color: red; position: absolute; right: 2%;" ng-show="nicknameForm.subjectName.$touched && nicknameForm.subjectName.$invalid">Required</span>
         <input name="subjectName" type="text" ng-model="vm.subject.nickname" placeholder="Nickname" ng-minlength="3" required>
       </label>
       <button class="button button-block button-positive" ng-click="vm.saveSubject()" ng-disabled="nicknameForm.$invalid">Submit</button>
+      <button class="button button-block button-balanced" ng-click="vm.suggestSubject()">Suggest</button>
     </form>
-    <button class="button button-block button-balanced" ng-click="vm.suggestSubject()">Suggest</button>
 
   </ion-content>
 </ion-view>
